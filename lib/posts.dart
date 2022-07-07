@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http_service/http_service.dart';
+import 'package:http_service/post_detail.dart';
 import 'package:http_service/post_model.dart';
 
 class PostsPage extends StatelessWidget {
@@ -22,6 +23,9 @@ class PostsPage extends StatelessWidget {
                   .map((Post post) => ListTile(
                 title: Text(post.title),
                 subtitle: Text(post.id.toString()),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => PostDetail(post: post))
+                ),
         ))
             .toList(),
         );
