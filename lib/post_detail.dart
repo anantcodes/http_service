@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:http_service/http_service.dart';
 import 'package:http_service/post_model.dart';
 
 class PostDetail extends StatelessWidget {
   final Post post;
+  final HttpService httpService=HttpService();
 
-  const PostDetail({required this.post,});
+   PostDetail({required this.post,});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +15,12 @@ class PostDetail extends StatelessWidget {
       appBar: AppBar(
         title: Text(post.title),
       ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+      onPressed: () async {
+          await httpService.deletePost(post.id);
+          Navigator.of(context).pop();
+      },),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(12.0),
